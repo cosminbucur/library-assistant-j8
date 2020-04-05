@@ -1,0 +1,83 @@
+import org.gradle.api.JavaVersion
+
+buildscript {
+    ext {
+        lombokVersion = '1.18.12'
+    }
+    repositories {
+        jcenter()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+}
+
+application {
+//    mainClassName = 'com.bucur.library.ui.main.Main'
+//    mainClassName = 'com.bucur.library.ui.login.LoginLoader'
+    mainClassName = 'com.bucur.library.ui.about.AboutLoader'
+//    mainClassName = 'com.bucur.library.ui.settings.SettingsLoader'  // class com.jfoenix.skins.JFXSpinnerSkin (in unnamed module @0x1db28ab0) cannot access class com.sun.javafx.scene.NodeHelper
+//    mainClassName = 'com.bucur.library.ui.notifoverdue.OverdueNotificationLoader'
+//    mainClassName = 'com.bucur.library.ui.notifoverdue.emailsender.EmailSenderLoader' // class com.jfoenix.skins.JFXProgressBarSkin (in unnamed module @0x70dc5f66) cannot access class com.sun.javafx.scene.NodeHelper
+
+//    mainClassName = 'com.bucur.library.ui.memberlist.MemberListLoader'
+//    mainClassName = 'com.bucur.library.ui.memberadd.MemberAddLoader'
+//    mainClassName = 'com.bucur.library.ui.booklist.BookListLoader'
+//    mainClassName = 'com.bucur.library.ui.bookadd.BookAddLoader'
+//    mainClassName = 'com.bucur.library.ui.issuedlist.IssuedListLoader'
+}
+
+java {
+    group 'com.bucur'
+    version '1.0-SNAPSHOT'
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+repositories {
+    jcenter()
+}
+
+// load fxml files from sources
+sourceSets.main {
+    java {
+        srcDir 'src/main/java'
+    }
+    resources {
+        srcDirs = ['src/main/java', 'src/main/resources']
+        exclude "**/*.java"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'com.google.code.gson:gson:2.8.6'         // json
+    implementation 'commons-codec:commons-codec:1.14'        // encoder / decoder
+    implementation 'org.apache.commons:commons-lang3:3.10'   // utils
+
+    implementation 'org.apache.pdfbox:pdfbox:2.0.19'         // create pdf
+    implementation 'com.github.dhorions:boxable:1.5'         // tables in pdf
+    implementation 'javax.mail:javax.mail-api:1.6.2'         // send email
+    implementation 'com.sun.mail:javax.mail:1.6.2'           // send email
+
+    implementation 'com.jfoenix:jfoenix:8.0.8'               // javafx with material
+    implementation 'de.jensd:fontawesomefx-fontawesome:4.7.0-5'     // font awesome icons
+
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // lombok
+
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
