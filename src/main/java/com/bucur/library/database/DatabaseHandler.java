@@ -33,7 +33,7 @@ import java.util.Set;
 public class DatabaseHandler {
 
     private static final Logger LOGGER = LogManager.getLogger(DatabaseHandler.class.getName());
-    private static final String DB_URL = "jdbc:h2:~/test";
+    private static final String DB_URL = "jdbc:h2:file:~/testdb";
     private static DatabaseHandler handler = null;
     private static Connection conn = null;
     private static Statement stmt = null;

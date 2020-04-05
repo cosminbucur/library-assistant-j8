@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 
 public class BookListController implements Initializable {
 
-    ObservableList<Book> list = FXCollections.observableArrayList();
+    private ObservableList<Book> list = FXCollections.observableArrayList();
 
     @FXML
     private StackPane rootPane;
@@ -83,13 +83,13 @@ public class BookListController implements Initializable {
         ResultSet rs = handler.execQuery(qu);
         try {
             while (rs.next()) {
-                String titlex = rs.getString("title");
+                String title = rs.getString("title");
                 String author = rs.getString("author");
                 String id = rs.getString("id");
                 String publisher = rs.getString("publisher");
-                Boolean avail = rs.getBoolean("isAvail");
+                Boolean available = rs.getBoolean("available");
 
-                list.add(new Book(titlex, id, author, publisher, avail));
+                list.add(new Book(title, id, author, publisher, available));
 
             }
         } catch (SQLException e) {
@@ -137,7 +137,7 @@ public class BookListController implements Initializable {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_book.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/book_add.fxml"));
             Parent parent = loader.load();
 
             BookAddController controller = (BookAddController) loader.getController();
@@ -166,7 +166,7 @@ public class BookListController implements Initializable {
     @FXML
     private void exportAsPDF(ActionEvent event) {
         List<List> printData = new ArrayList<>();
-        String[] headers = {"   Title   ", "ID", "  Author  ", "  Publisher ", "Avail"};
+        String[] headers = {"   Title   ", "ID", "  Author  ", "  Publisher ", "Available"};
         printData.add(Arrays.asList(headers));
         for (Book book : list) {
             List<String> row = new ArrayList<>();
@@ -174,7 +174,7 @@ public class BookListController implements Initializable {
             row.add(book.getId());
             row.add(book.getAuthor());
             row.add(book.getPublisher());
-            row.add(book.getAvailabilty());
+            row.add(book.isAvailable());
             printData.add(row);
         }
         LibraryAssistantUtil.initPDFExport(rootPane, contentPane, getStage(), printData);
@@ -191,17 +191,17 @@ public class BookListController implements Initializable {
         private final SimpleStringProperty id;
         private final SimpleStringProperty author;
         private final SimpleStringProperty publisher;
-        private final SimpleStringProperty availabilty;
+        private final SimpleStringProperty available;
 
-        public Book(String title, String id, String author, String pub, Boolean avail) {
+        public Book(String title, String id, String author, String publisher, Boolean available) {
             this.title = new SimpleStringProperty(title);
             this.id = new SimpleStringProperty(id);
             this.author = new SimpleStringProperty(author);
-            this.publisher = new SimpleStringProperty(pub);
-            if (avail) {
-                this.availabilty = new SimpleStringProperty("Available");
+            this.publisher = new SimpleStringProperty(publisher);
+            if (available) {
+                this.available = new SimpleStringProperty("Available");
             } else {
-                this.availabilty = new SimpleStringProperty("Issued");
+                this.available = new SimpleStringProperty("Issued");
             }
         }
 
@@ -221,8 +221,8 @@ public class BookListController implements Initializable {
             return publisher.get();
         }
 
-        public String getAvailabilty() {
-            return availabilty.get();
+        public String isAvailable() {
+            return available.get();
         }
 
     }

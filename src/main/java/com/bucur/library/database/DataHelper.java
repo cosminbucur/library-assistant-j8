@@ -19,12 +19,12 @@ public class DataHelper {
     public static boolean insertNewBook(Book book) {
         try {
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(
-                "INSERT INTO BOOK(id,title,author,publisher,isAvail) VALUES(?,?,?,?,?)");
+                "INSERT INTO BOOK(id,title,author,publisher,available) VALUES(?,?,?,?,?)");
             statement.setString(1, book.getId());
             statement.setString(2, book.getTitle());
             statement.setString(3, book.getAuthor());
             statement.setString(4, book.getPublisher());
-            statement.setBoolean(5, book.getAvailability());
+            statement.setBoolean(5, book.isAvailable());
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "{}", e);
@@ -83,7 +83,7 @@ public class DataHelper {
 
     public static ResultSet getBookInfoWithIssueData(String id) {
         try {
-            String query = "SELECT BOOK.title, BOOK.author, BOOK.isAvail, ISSUE.issueTime FROM BOOK LEFT JOIN ISSUE on BOOK.id = ISSUE.bookID where BOOK.id = ?";
+            String query = "SELECT BOOK.title, BOOK.author, BOOK.available, ISSUE.issueTime FROM BOOK LEFT JOIN ISSUE on BOOK.id = ISSUE.bookID where BOOK.id = ?";
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(query);
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();

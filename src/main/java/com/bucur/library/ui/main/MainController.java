@@ -143,7 +143,7 @@ public class MainController implements Initializable, BookReturnCallback {
             if (rs.next()) {
                 String bName = rs.getString("title");
                 String bAuthor = rs.getString("author");
-                Boolean bStatus = rs.getBoolean("isAvail");
+                Boolean bStatus = rs.getBoolean("available");
                 Timestamp issuedOn = rs.getTimestamp("issueTime");
 
                 bookName.setText(bName);
@@ -239,7 +239,7 @@ public class MainController implements Initializable, BookReturnCallback {
             String str = "INSERT INTO ISSUE(memberID,bookID) VALUES ("
                 + "'" + memberID + "',"
                 + "'" + bookID + "')";
-            String str2 = "UPDATE BOOK SET isAvail = false WHERE id = '" + bookID + "'";
+            String str2 = "UPDATE BOOK SET available = false WHERE id = '" + bookID + "'";
             System.out.println(str + " and " + str2);
 
             if (databaseHandler.execAction(str) && databaseHandler.execAction(str2)) {
@@ -331,7 +331,7 @@ public class MainController implements Initializable, BookReturnCallback {
         yesButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent ev) -> {
             String id = bookID.getText();
             String ac1 = "DELETE FROM ISSUE WHERE BOOKID = '" + id + "'";
-            String ac2 = "UPDATE BOOK SET ISAVAIL = TRUE WHERE ID = '" + id + "'";
+            String ac2 = "UPDATE BOOK SET AVAILABLE = TRUE WHERE ID = '" + id + "'";
 
             if (databaseHandler.execAction(ac1) && databaseHandler.execAction(ac2)) {
                 JFXButton btn = new JFXButton("Done!");
