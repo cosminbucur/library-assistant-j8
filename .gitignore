@@ -12,3 +12,4 @@
 *.ipr
 
 !/*.log
+!/config.txt
