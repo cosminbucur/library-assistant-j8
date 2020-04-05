@@ -80,7 +80,7 @@ public class LibraryAssistantUtil {
         File saveLoc = fileChooser.showSaveDialog(stage);
         ListToPDF ltp = new ListToPDF();
         boolean flag = ltp.doPrintToPdf(data, saveLoc, ListToPDF.Orientation.LANDSCAPE);
-        JFXButton okayBtn = new JFXButton("Okay");
+        JFXButton OKBtn = new JFXButton("OK");
         JFXButton openBtn = new JFXButton("View File");
         openBtn.setOnAction((ActionEvent event1) -> {
             try {
@@ -90,7 +90,7 @@ public class LibraryAssistantUtil {
             }
         });
         if (flag) {
-            AlertMaker.showMaterialDialog(rootPane, contentPane, Arrays.asList(okayBtn, openBtn), "Completed", "Member data has been exported.");
+            AlertMaker.showMaterialDialog(rootPane, contentPane, Arrays.asList(OKBtn, openBtn), "Completed", "Member data has been exported.");
         }
     }
 

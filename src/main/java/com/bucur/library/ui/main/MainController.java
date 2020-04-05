@@ -250,14 +250,14 @@ public class MainController implements Initializable, BookReturnCallback {
                 AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(button), "Book Issue Complete", null);
                 refreshGraphs();
             } else {
-                JFXButton button = new JFXButton("Okay.I'll Check");
+                JFXButton button = new JFXButton("OK.I'll Check");
                 AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(button), "Issue Operation Failed", null);
             }
             clearIssueEntries();
         });
         JFXButton noButton = new JFXButton("NO");
         noButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event1) -> {
-            JFXButton button = new JFXButton("That's Okay");
+            JFXButton button = new JFXButton("That's OK");
             AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(button), "Issue Cancelled", null);
             clearIssueEntries();
         });
@@ -310,7 +310,7 @@ public class MainController implements Initializable, BookReturnCallback {
                 disableEnableControls(true);
                 submissionDataContainer.setOpacity(1);
             } else {
-                JFXButton button = new JFXButton("Okay.I'll Check");
+                JFXButton button = new JFXButton("OK.I'll Check");
                 AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(button), "No such Book Exists in Issue Database", null);
             }
         } catch (Exception e) {
@@ -342,7 +342,7 @@ public class MainController implements Initializable, BookReturnCallback {
                 disableEnableControls(false);
                 submissionDataContainer.setOpacity(0);
             } else {
-                JFXButton btn = new JFXButton("Okay.I'll Check");
+                JFXButton btn = new JFXButton("OK.I'll Check");
                 AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(btn), "Submission Has Been Failed", null);
             }
         });

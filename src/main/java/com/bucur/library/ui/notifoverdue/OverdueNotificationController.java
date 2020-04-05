@@ -135,7 +135,7 @@ public class OverdueNotificationController implements Initializable {
     }
 
     private void checkForMailServerConfig() {
-        JFXButton button = new JFXButton("Okay");
+        JFXButton button = new JFXButton("OK");
         button.setOnAction((ActionEvent event) -> {
             ((Stage) rootPane.getScene().getWindow()).close();
         });

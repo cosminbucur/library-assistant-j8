@@ -135,6 +135,7 @@ public class AlertMaker {
         nodeToBeBlurred.setEffect(blur);
     }
 
+    // TODO: fix this
     public static void showTrayMessage(String title, String message) {
         try {
             SystemTray tray = SystemTray.getSystemTray();

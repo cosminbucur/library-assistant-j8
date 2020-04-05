@@ -1,6 +1,7 @@
 buildscript {
     ext {
         lombokVersion = '1.18.12'
+        junitVersion= '5.4.2'
     }
     repositories {
         jcenter()
@@ -42,13 +43,15 @@ repositories {
 }
 
 // load fxml files from sources
-sourceSets.main {
-    java {
-        srcDir 'src/main/java'
-    }
-    resources {
-        srcDirs = ['src/main/java', 'src/main/resources']
-        exclude "**/*.java"
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDirs = ['src/main/java', 'src/main/resources']
+            exclude "**/*.java"
+        }
     }
 }
 
@@ -70,6 +73,11 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.2.4'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"      // use junit 5 new methods
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"   // runs parametrized test
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.5.0'       // handle default launcher
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"      // run junit 5 tests
 
     // lombok
 

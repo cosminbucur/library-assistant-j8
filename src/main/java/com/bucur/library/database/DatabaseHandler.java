@@ -33,7 +33,7 @@ import java.util.Set;
 public class DatabaseHandler {
 
     private static final Logger LOGGER = LogManager.getLogger(DatabaseHandler.class.getName());
-    private static final String DB_URL = "jdbc:h2:mem:";
+    private static final String DB_URL = "jdbc:h2:~/test";
     private static DatabaseHandler handler = null;
     private static Connection conn = null;
     private static Statement stmt = null;
@@ -80,7 +80,7 @@ public class DatabaseHandler {
 
     private void createConnection() {
         try {
-            conn = DriverManager.getConnection(DB_URL);
+            conn = DriverManager.getConnection(DB_URL, "sa", "");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Cant load database", "Database Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
