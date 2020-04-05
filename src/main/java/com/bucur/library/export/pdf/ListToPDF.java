@@ -50,8 +50,8 @@ public class ListToPDF {
             doc.close();
 
             return true;
-        } catch (IOException ex) {
-            AlertMaker.showErrorMessage("Error occurred during PDF export", ex.getMessage());
+        } catch (IOException e) {
+            AlertMaker.showErrorMessage("Error occurred during PDF export", e.getMessage());
         }
         return false;
     }

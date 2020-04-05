@@ -112,8 +112,8 @@ public class DatabaseHandler {
                 System.out.println("Inflating new tables.");
                 createTables(tableData);
             }
-        } catch (Exception ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
     }
 
@@ -122,8 +122,8 @@ public class DatabaseHandler {
         try {
             stmt = conn.createStatement();
             result = stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+        } catch (SQLException e) {
+            System.out.println("Exception at execQuery:dataHandler" + e.getLocalizedMessage());
             return null;
         } finally {
         }
@@ -135,9 +135,9 @@ public class DatabaseHandler {
             stmt = conn.createStatement();
             stmt.execute(qu);
             return true;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error occurred", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error occurred", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Exception at execQuery:dataHandler" + e.getLocalizedMessage());
             return false;
         } finally {
         }
@@ -152,8 +152,8 @@ public class DatabaseHandler {
             if (res == 1) {
                 return true;
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -169,8 +169,8 @@ public class DatabaseHandler {
                 System.out.println(count);
                 return (count > 0);
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -184,8 +184,8 @@ public class DatabaseHandler {
             if (res == 1) {
                 return true;
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -201,8 +201,8 @@ public class DatabaseHandler {
                 System.out.println(count);
                 return (count > 0);
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -217,8 +217,8 @@ public class DatabaseHandler {
             stmt.setString(4, book.getId());
             int res = stmt.executeUpdate();
             return (res > 0);
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -233,8 +233,8 @@ public class DatabaseHandler {
             stmt.setString(4, member.getId());
             int res = stmt.executeUpdate();
             return (res > 0);
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }

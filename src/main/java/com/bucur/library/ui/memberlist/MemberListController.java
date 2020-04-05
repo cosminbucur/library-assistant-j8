@@ -89,8 +89,8 @@ public class MemberListController implements Initializable {
                 list.add(new Member(name, id, mobile, email));
 
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(BookAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(BookAddController.class.getName()).log(Level.SEVERE, null, e);
         }
 
         tableView.setItems(list);
@@ -155,8 +155,8 @@ public class MemberListController implements Initializable {
                 handleRefresh(new ActionEvent());
             });
 
-        } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

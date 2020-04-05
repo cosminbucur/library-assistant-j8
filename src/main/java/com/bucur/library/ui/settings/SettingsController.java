@@ -113,9 +113,9 @@ public class SettingsController implements Initializable {
                 throw new InvalidParameterException();
             }
             return mailServerInfo;
-        } catch (Exception exp) {
+        } catch (Exception e) {
             AlertMaker.showErrorMessage("Invalid Entries Found", "Correct input and try again");
-            LOGGER.log(Level.WARN, exp);
+            LOGGER.log(Level.WARN, e);
         }
         return null;
     }

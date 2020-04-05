@@ -39,8 +39,8 @@ public class EncryptionUtil {
                 throw new RuntimeException("Cant load encryption");
             }
             return encrypt(spec.getKey(), spec.getIV(), plainText);
-        } catch (Exception ex) {
-            LOGGER.log(Level.ERROR, "Encryption failure", ex);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "Encryption failure", e);
         } finally {
             LOCK.unlock();
         }
@@ -55,8 +55,8 @@ public class EncryptionUtil {
                 throw new RuntimeException("Cant load encryption");
             }
             return decrypt(spec.getKey(), spec.getIV(), cipherText);
-        } catch (Exception ex) {
-            LOGGER.log(Level.ERROR, "Encryption failure", ex);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "Encryption failure", e);
         } finally {
             LOCK.unlock();
         }
@@ -71,8 +71,8 @@ public class EncryptionUtil {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
             byte[] encrypted = cipher.doFinal(value.getBytes());
             return Base64.encodeBase64String(encrypted);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
@@ -89,8 +89,8 @@ public class EncryptionUtil {
             byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
 
             return new String(original);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;

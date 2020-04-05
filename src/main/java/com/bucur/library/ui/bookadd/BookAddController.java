@@ -96,8 +96,8 @@ public class BookAddController implements Initializable {
                 String titlex = rs.getString("title");
                 System.out.println(titlex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(BookAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(BookAddController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

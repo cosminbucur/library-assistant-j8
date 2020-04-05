@@ -165,8 +165,8 @@ public class MainController implements Initializable, BookReturnCallback {
                 memberIDInput.requestFocus();
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -206,8 +206,8 @@ public class MainController implements Initializable, BookReturnCallback {
             } else {
                 btnIssue.requestFocus();
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -445,8 +445,8 @@ public class MainController implements Initializable, BookReturnCallback {
             drawer.setSidePane(toolbar);
             ToolbarController controller = loader.getController();
             controller.setBookReturnCallback(this);
-        } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
         }
         HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
         task.setRate(-1);

@@ -35,13 +35,13 @@ public class Preferences {
             Gson gson = new Gson();
             writer = new FileWriter(CONFIG_FILE);
             gson.toJson(preference, writer);
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 writer.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }
@@ -51,7 +51,7 @@ public class Preferences {
         Preferences preferences = new Preferences();
         try {
             preferences = gson.fromJson(new FileReader(CONFIG_FILE), Preferences.class);
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException e) {
             Logger.getLogger(Preferences.class.getName()).info("Config file is missing. Creating new one with default config");
             initConfig();
         }
@@ -66,14 +66,14 @@ public class Preferences {
             gson.toJson(preference, writer);
 
             AlertMaker.showSimpleAlert("Success", "Settings updated");
-        } catch (IOException ex) {
-            Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
-            AlertMaker.showErrorMessage(ex, "Failed", "Cant save configuration file");
+        } catch (IOException e) {
+            Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, e);
+            AlertMaker.showErrorMessage(e, "Failed", "Cant save configuration file");
         } finally {
             try {
                 writer.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }

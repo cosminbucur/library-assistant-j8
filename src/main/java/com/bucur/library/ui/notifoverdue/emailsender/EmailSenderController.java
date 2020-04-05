@@ -46,8 +46,8 @@ public class EmailSenderController implements Initializable {
                 emailText.append(scanner.nextLine()).append("\n");
             }
             System.out.println(emailText);
-        } catch (Exception ex) {
-            Logger.getLogger(EmailSenderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(EmailSenderController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

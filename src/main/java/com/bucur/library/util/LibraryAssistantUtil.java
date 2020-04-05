@@ -55,8 +55,8 @@ public class LibraryAssistantUtil {
             stage.setScene(new Scene(parent));
             stage.show();
             setStageIcon(stage);
-        } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
         }
         return controller;
     }
@@ -85,7 +85,7 @@ public class LibraryAssistantUtil {
         openBtn.setOnAction((ActionEvent event1) -> {
             try {
                 Desktop.getDesktop().open(saveLoc);
-            } catch (Exception exp) {
+            } catch (Exception e) {
                 AlertMaker.showErrorMessage("Could not load file", "Cant load file");
             }
         });
@@ -117,8 +117,8 @@ public class LibraryAssistantUtil {
         try {
             Desktop desktop = Desktop.getDesktop();
             desktop.open(file);
-        } catch (IOException ex) {
-            Logger.getLogger(LibraryAssistantUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(LibraryAssistantUtil.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }

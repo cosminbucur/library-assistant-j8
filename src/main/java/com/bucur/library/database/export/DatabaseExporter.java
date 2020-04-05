@@ -23,8 +23,8 @@ public class DatabaseExporter extends Task<Boolean> {
         try {
             createBackup();
             return true;
-        } catch (Exception exp) {
-            AlertMaker.showErrorMessage(exp);
+        } catch (Exception e) {
+            AlertMaker.showErrorMessage(e);
         }
         return false;
     }

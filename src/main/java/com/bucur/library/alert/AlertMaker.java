@@ -46,18 +46,18 @@ public class AlertMaker {
         alert.showAndWait();
     }
 
-    public static void showErrorMessage(Exception ex) {
+    public static void showErrorMessage(Exception e) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error occurred");
         alert.setHeaderText("Error occurred");
-        alert.setContentText(ex.getLocalizedMessage());
+        alert.setContentText(e.getLocalizedMessage());
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        ex.printStackTrace(pw);
+        e.printStackTrace(pw);
         String exceptionText = sw.toString();
 
-        Label label = new Label("The exception stacktrace was:");
+        Label label = new Label("The exception stack trace was:");
 
         TextArea textArea = new TextArea(exceptionText);
         textArea.setEditable(false);
@@ -79,7 +79,7 @@ public class AlertMaker {
         alert.showAndWait();
     }
 
-    public static void showErrorMessage(Exception ex, String title, String content) {
+    public static void showErrorMessage(Exception e, String title, String content) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error occurred");
         alert.setHeaderText(title);
@@ -87,10 +87,10 @@ public class AlertMaker {
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        ex.printStackTrace(pw);
+        e.printStackTrace(pw);
         String exceptionText = sw.toString();
 
-        Label label = new Label("The exception stacktrace was:");
+        Label label = new Label("The exception stack trace was:");
 
         TextArea textArea = new TextArea(exceptionText);
         textArea.setEditable(false);
@@ -101,12 +101,12 @@ public class AlertMaker {
         GridPane.setVgrow(textArea, Priority.ALWAYS);
         GridPane.setHgrow(textArea, Priority.ALWAYS);
 
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(Double.MAX_VALUE);
-        expContent.add(label, 0, 0);
-        expContent.add(textArea, 0, 1);
+        GridPane expandableContent = new GridPane();
+        expandableContent.setMaxWidth(Double.MAX_VALUE);
+        expandableContent.add(label, 0, 0);
+        expandableContent.add(textArea, 0, 1);
 
-        alert.getDialogPane().setExpandableContent(expContent);
+        alert.getDialogPane().setExpandableContent(expandableContent);
         alert.showAndWait();
     }
 
@@ -120,18 +120,14 @@ public class AlertMaker {
 
         controls.forEach(controlButton -> {
             controlButton.getStyleClass().add("dialog-button");
-            controlButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
-                dialog.close();
-            });
+            controlButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> dialog.close());
         });
 
         dialogLayout.setHeading(new Label(header));
         dialogLayout.setBody(new Label(body));
         dialogLayout.setActions(controls);
         dialog.show();
-        dialog.setOnDialogClosed((JFXDialogEvent event1) -> {
-            nodeToBeBlurred.setEffect(null);
-        });
+        dialog.setOnDialogClosed((JFXDialogEvent event1) -> nodeToBeBlurred.setEffect(null));
         nodeToBeBlurred.setEffect(blur);
     }
 
@@ -146,8 +142,8 @@ public class AlertMaker {
             tray.add(trayIcon);
             trayIcon.displayMessage(title, message, MessageType.INFO);
             tray.remove(trayIcon);
-        } catch (Exception exp) {
-            exp.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -69,8 +69,8 @@ public class LoginController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.show();
             LibraryAssistantUtil.setStageIcon(stage);
-        } catch (IOException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
     }
 

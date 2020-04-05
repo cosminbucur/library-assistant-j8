@@ -26,8 +26,8 @@ public class DataHelper {
             statement.setString(4, book.getPublisher());
             statement.setBoolean(5, book.getAvailability());
             return statement.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -41,8 +41,8 @@ public class DataHelper {
             statement.setString(3, member.getMobile());
             statement.setString(4, member.getEmail());
             return statement.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -58,8 +58,8 @@ public class DataHelper {
                 System.out.println(count);
                 return (count > 0);
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -75,8 +75,8 @@ public class DataHelper {
                 System.out.println(count);
                 return (count > 0);
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -88,8 +88,8 @@ public class DataHelper {
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             return rs;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return null;
     }
@@ -98,8 +98,8 @@ public class DataHelper {
         try {
             Statement statement = DatabaseHandler.getInstance().getConnection().createStatement();
             statement.execute("DELETE FROM " + tableName + " WHERE TRUE");
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
     }
 
@@ -114,8 +114,8 @@ public class DataHelper {
             statement.setString(4, mailServerInfo.getPassword());
             statement.setBoolean(5, mailServerInfo.getSslEnabled());
             return statement.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return false;
     }
@@ -133,8 +133,8 @@ public class DataHelper {
                 Boolean sslEnabled = rs.getBoolean("ssl_enabled");
                 return new MailServerInfo(mailServer, port, emailID, userPassword, sslEnabled);
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.ERROR, "{}", ex);
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "{}", e);
         }
         return null;
     }
