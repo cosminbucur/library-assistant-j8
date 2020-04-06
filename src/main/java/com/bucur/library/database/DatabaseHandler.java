@@ -64,10 +64,6 @@ public class DatabaseHandler {
         return set;
     }
 
-    public static void main(String[] args) throws Exception {
-        DatabaseHandler.getInstance();
-    }
-
     private static void createTables(List<String> tableData) throws SQLException {
         Statement statement = conn.createStatement();
         statement.closeOnCompletion();
@@ -117,7 +113,7 @@ public class DatabaseHandler {
         }
     }
 
-    public ResultSet execQuery(String query) {
+    public ResultSet executeQuery(String query) {
         ResultSet result;
         try {
             stmt = conn.createStatement();
@@ -125,12 +121,11 @@ public class DatabaseHandler {
         } catch (SQLException e) {
             System.out.println("Exception at execQuery:dataHandler" + e.getLocalizedMessage());
             return null;
-        } finally {
         }
         return result;
     }
 
-    public boolean execAction(String qu) {
+    public boolean executeAction(String qu) {
         try {
             stmt = conn.createStatement();
             stmt.execute(qu);
@@ -139,7 +134,6 @@ public class DatabaseHandler {
             JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error occurred", JOptionPane.ERROR_MESSAGE);
             System.out.println("Exception at execQuery:dataHandler" + e.getLocalizedMessage());
             return false;
-        } finally {
         }
     }
 
@@ -160,13 +154,12 @@ public class DatabaseHandler {
 
     public boolean isBookAlreadyIssued(Book book) {
         try {
-            String checkstmt = "SELECT COUNT(*) FROM ISSUE WHERE bookid=?";
-            PreparedStatement stmt = conn.prepareStatement(checkstmt);
+            String sql = "SELECT COUNT(*) FROM ISSUE WHERE bookid=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, book.getId());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);
-                System.out.println(count);
                 return (count > 0);
             }
         } catch (SQLException e) {
@@ -177,8 +170,8 @@ public class DatabaseHandler {
 
     public boolean deleteMember(MemberListController.Member member) {
         try {
-            String deleteStatement = "DELETE FROM MEMBER WHERE id = ?";
-            PreparedStatement stmt = conn.prepareStatement(deleteStatement);
+            String sql = "DELETE FROM MEMBER WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, member.getId());
             int res = stmt.executeUpdate();
             if (res == 1) {
@@ -192,13 +185,12 @@ public class DatabaseHandler {
 
     public boolean isMemberHasAnyBooks(MemberListController.Member member) {
         try {
-            String checkstmt = "SELECT COUNT(*) FROM ISSUE WHERE memberID=?";
-            PreparedStatement stmt = conn.prepareStatement(checkstmt);
+            String sql = "SELECT COUNT(*) FROM ISSUE WHERE memberID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, member.getId());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);
-                System.out.println(count);
                 return (count > 0);
             }
         } catch (SQLException e) {
@@ -209,8 +201,8 @@ public class DatabaseHandler {
 
     public boolean updateBook(Book book) {
         try {
-            String update = "UPDATE BOOK SET TITLE=?, AUTHOR=?, PUBLISHER=? WHERE ID=?";
-            PreparedStatement stmt = conn.prepareStatement(update);
+            String sql = "UPDATE BOOK SET TITLE=?, AUTHOR=?, PUBLISHER=? WHERE ID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, book.getTitle());
             stmt.setString(2, book.getAuthor());
             stmt.setString(3, book.getPublisher());
@@ -225,8 +217,8 @@ public class DatabaseHandler {
 
     public boolean updateMember(MemberListController.Member member) {
         try {
-            String update = "UPDATE MEMBER SET NAME=?, EMAIL=?, MOBILE=? WHERE ID=?";
-            PreparedStatement stmt = conn.prepareStatement(update);
+            String sql = "UPDATE MEMBER SET NAME=?, EMAIL=?, MOBILE=? WHERE ID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, member.getName());
             stmt.setString(2, member.getEmail());
             stmt.setString(3, member.getMobile());
@@ -242,14 +234,14 @@ public class DatabaseHandler {
     public ObservableList<PieChart.Data> getBookGraphStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         try {
-            String qu1 = "SELECT COUNT(*) FROM BOOK";
-            String qu2 = "SELECT COUNT(*) FROM ISSUE";
-            ResultSet rs = execQuery(qu1);
+            String countBooksSql = "SELECT COUNT(*) FROM BOOK";
+            String countIssuesSql = "SELECT COUNT(*) FROM ISSUE";
+            ResultSet rs = executeQuery(countBooksSql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Total Books (" + count + ")", count));
             }
-            rs = execQuery(qu2);
+            rs = executeQuery(countIssuesSql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Issued Books (" + count + ")", count));
@@ -263,14 +255,14 @@ public class DatabaseHandler {
     public ObservableList<PieChart.Data> getMemberGraphStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         try {
-            String qu1 = "SELECT COUNT(*) FROM MEMBER";
-            String qu2 = "SELECT COUNT(DISTINCT memberID) FROM ISSUE";
-            ResultSet rs = execQuery(qu1);
+            String countMembersSql = "SELECT COUNT(*) FROM MEMBER";
+            String countIssuedMembersSql = "SELECT COUNT(DISTINCT memberID) FROM ISSUE";
+            ResultSet rs = executeQuery(countMembersSql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Total Members (" + count + ")", count));
             }
-            rs = execQuery(qu2);
+            rs = executeQuery(countIssuedMembersSql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Active (" + count + ")", count));

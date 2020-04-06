@@ -85,7 +85,7 @@ public class IssuedListController implements Initializable {
             + "ON MEMBER.id = ISSUE.memberID\n"
             + "LEFT OUTER JOIN BOOK\n"
             + "ON BOOK.id = ISSUE.bookID";
-        ResultSet rs = handler.execQuery(qu);
+        ResultSet rs = handler.executeQuery(qu);
         Preferences pref = Preferences.getPreferences();
         try {
             int counter = 0;

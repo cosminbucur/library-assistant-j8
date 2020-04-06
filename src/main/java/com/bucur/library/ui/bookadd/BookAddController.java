@@ -90,7 +90,7 @@ public class BookAddController implements Initializable {
 
     private void checkData() {
         String qu = "SELECT title FROM BOOK";
-        ResultSet rs = databaseHandler.execQuery(qu);
+        ResultSet rs = databaseHandler.executeQuery(qu);
         try {
             while (rs.next()) {
                 String titlex = rs.getString("title");

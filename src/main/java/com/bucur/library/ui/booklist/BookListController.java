@@ -80,7 +80,7 @@ public class BookListController implements Initializable {
 
         DatabaseHandler handler = DatabaseHandler.getInstance();
         String qu = "SELECT * FROM BOOK";
-        ResultSet rs = handler.execQuery(qu);
+        ResultSet rs = handler.executeQuery(qu);
         try {
             while (rs.next()) {
                 String title = rs.getString("title");
